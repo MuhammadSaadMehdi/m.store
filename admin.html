@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Panel – Maha Collection</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Nunito:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --wine: #8B1A4A;
+  --rose: #C9536A;
+  --gold: #D4A853;
+  --cream: #FDF6F0;
+  --dark: #1a0a10;
+  --serif: 'Playfair Display', Georgia, serif;
+  --sans: 'Nunito', sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: var(--sans);
+  background: #f4eee9;
+  padding: 24px;
+}
+.admin-login {
+  max-width: 380px;
+  margin: 80px auto;
+  background: #fff;
+  border-radius: 24px;
+  padding: 36px 32px;
+  box-shadow: 0 20px 40px rgba(139,26,74,0.15);
+  text-align: center;
+}
+.admin-login-logo {
+  font-family: var(--serif);
+  font-size: 28px;
+  color: var(--wine);
+  margin-bottom: 6px;
+}
+.admin-login-sub {
+  font-size: 12px;
+  color: #aaa;
+  margin-bottom: 28px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.a-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+  text-align: left;
+}
+.a-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #8a7f74;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+.a-input {
+  padding: 12px 14px;
+  border: 1.5px solid rgba(139,26,74,0.2);
+  border-radius: 12px;
+  font-family: var(--sans);
+  font-size: 14px;
+  width: 100%;
+  outline: none;
+  transition: all 0.2s;
+}
+.a-input:focus {
+  border-color: var(--rose);
+  box-shadow: 0 0 0 3px rgba(201,83,106,0.12);
+}
+.a-btn {
+  padding: 10px 18px;
+  border-radius: 40px;
+  border: none;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.a-btn-primary {
+  background: linear-gradient(135deg, var(--wine), var(--rose));
+  color: #fff;
+  width: 100%;
+}
+.a-btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(201,83,106,0.3);
+}
+.err-msg {
+  color: #e53e3e;
+  font-size: 12px;
+  margin-bottom: 12px;
+  display: none;
+}
+
+/* Admin Panel Styles */
+.admin-panel {
+  background: #fff;
+  border-radius: 24px;
+  max-width: 1300px;
+  margin: 0 auto;
+  overflow: hidden;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 48px);
+}
+.admin-hdr {
+  background: linear-gradient(135deg, var(--wine), var(--rose));
+  color: #fff;
+  padding: 18px 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+}
+.admin-hdr h2 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 20px;
+}
+.admin-body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+.admin-sidebar {
+  width: 220px;
+  background: #fefaf7;
+  border-right: 1px solid rgba(139,26,74,0.1);
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+.admin-nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 24px;
+  background: none;
+  border: none;
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 500;
+  color: #5a4a42;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: left;
+  border-left: 3px solid transparent;
+  width: 100%;
+}
+.admin-nav-btn:hover {
+  background: rgba(201,83,106,0.06);
+  color: var(--wine);
+}
+.admin-nav-btn.active {
+  background: rgba(201,83,106,0.1);
+  color: var(--wine);
+  border-left-color: var(--rose);
+  font-weight: 600;
+}
+.admin-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px 28px;
+  background: #fff;
+}
+.a-section {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 22px 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  border: 1px solid rgba(139,26,74,0.06);
+}
+.a-section-title {
+  font-family: var(--serif);
+  font-size: 16px;
+  color: var(--wine);
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(139,26,74,0.1);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: space-between;
+}
+.a-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+.a-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 16px;
+}
+.a-save-bar {
+  margin-top: 20px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.a-success-msg {
+  font-size: 12px;
+  color: #22c55e;
+  font-weight: 600;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.a-success-msg.show { opacity: 1; }
+.a-btn-secondary {
+  background: #f0eae6;
+  color: #5a4a42;
+}
+.a-btn-danger {
+  background: #fee2e2;
+  color: #e53e3e;
+  border: none;
+}
+.img-upload-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.img-upload-btn {
+  padding: 8px 14px;
+  border-radius: 12px;
+  border: 1.5px dashed rgba(201,83,106,0.4);
+  background: rgba(201,83,106,0.05);
+  color: var(--rose);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.img-preview {
+  width: 54px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid rgba(139,26,74,0.12);
+}
+.a-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.a-table th {
+  text-align: left;
+  padding: 12px 12px;
+  background: rgba(139,26,74,0.03);
+  color: var(--wine);
+  font-weight: 600;
+  font-size: 11px;
+  text-transform: uppercase;
+}
+.a-table td {
+  padding: 12px 12px;
+  border-bottom: 1px solid rgba(139,26,74,0.06);
+  vertical-align: middle;
+}
+.admin-stats-row {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.admin-stat-box {
+  background: #fff;
+  border-radius: 20px;
+  padding: 18px;
+  text-align: center;
+  box-shadow: 0 2px 12px rgba(139,26,74,0.05);
+  border: 1px solid rgba(139,26,74,0.08);
+}
+.admin-stat-box .asn {
+  font-family: var(--serif);
+  font-size: 28px;
+  color: var(--wine);
+  font-weight: 700;
+}
+.testi-item {
+  background: rgba(139,26,74,0.02);
+  border: 1px solid rgba(139,26,74,0.1);
+  border-radius: 16px;
+  padding: 18px;
+  margin-bottom: 16px;
+}
+.pill-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+.pill-tag {
+  background: rgba(201,83,106,0.1);
+  color: var(--wine);
+  border-radius: 50px;
+  padding: 6px 12px 6px 16px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.pill-tag button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+}
+</style>
+</head>
+<body>
+<div id="app"></div>
+
+<script>
+// ========== CONFIG ==========
+const CONFIG = {
+  whatsappNumber: "923700429801",
+  brandName: "Maha Collection",
+  tagline: "Where Every Piece Tells a Story",
+  instagram: "https://www.instagram.com/mahacollection",
+  facebook: "https://www.facebook.com/mahacollection",
+  tiktok: "https://www.tiktok.com/@mahacollection",
+  adminPassword: "admin1234",
+  heroBanner: "",
+  heroTitle1: "Maha",
+  heroTitle2: "Collection",
+  heroSub: "Premium Pakistani fashion — lawn suits, bridal wear, jewellery & more.\nOrder instantly on WhatsApp 🇵🇰",
+  trustPills: ["🚚 Fast Delivery", "✅ 100% Authentic", "💬 24/7 Support", "🔄 Easy Returns"],
+  stat1n: "10,000+", stat1l: "Happy Customers",
+  stat2n: "500+", stat2l: "Products",
+  stat3n: "4.9★", stat3l: "Average Rating",
+  stat4n: "Same Day", stat4l: "WhatsApp Reply"
+};
+
+let PRODUCTS = [
+  { id:"1", name:"Embroidered Lawn Suit", price:3500, category:"Suits", image:"https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=700&q=85", badge:"Bestseller", rating:4.9, reviews:312, description:"Premium lawn fabric with intricate thread embroidery. 3-piece unstitched set." },
+  { id:"2", name:"Silk Chiffon Dupatta", price:1800, category:"Dupattas", image:"https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=700&q=85", badge:"New", rating:4.8, reviews:98, description:"Pure silk chiffon with hand-block print borders. 2.5 meters." },
+  { id:"3", name:"Bridal Lehenga Set", price:45000, category:"Bridal", image:"https://images.unsplash.com/photo-1585914641050-fa9883c4e21c?w=700&q=85", badge:"Premium", rating:5.0, reviews:54, description:"Heavy bridal lehenga with zari work, mirror detailing, full set." },
+  { id:"4", name:"Kashmiri Shawl", price:8500, category:"Shawls", image:"https://images.unsplash.com/photo-1601924994987-69e26d50dc26?w=700&q=85", badge:"Limited", rating:4.9, reviews:167, description:"Hand-woven pure wool Kashmiri shawl with traditional paisley motifs." },
+  { id:"5", name:"Printed Khaddar Suit", price:2200, category:"Suits", image:"https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=700&q=85", badge:"Top Rated", rating:4.7, reviews:289, description:"Winter khaddar with digital print, warm and stylish. Unstitched." },
+  { id:"6", name:"Gold Jhumka Earrings", price:1200, category:"Jewellery", image:"https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=700&q=85", badge:"Hot", rating:4.8, reviews:445, description:"Traditional Pakistani jhumka, antique gold finish, lightweight." },
+  { id:"7", name:"Organza Party Frock", price:5500, category:"Formals", image:"https://images.unsplash.com/photo-1566479100951-a12f5ade9e7b?w=700&q=85", badge:"New", rating:4.6, reviews:73, description:"Flowy organza frock with embellished neckline, ready-to-wear." },
+  { id:"8", name:"Handcrafted Clutch Bag", price:3200, category:"Bags", image:"https://images.unsplash.com/photo-1566150905458-1bf1aca981a8?w=700&q=85", badge:"", rating:4.7, reviews:122, description:"Hand-beaded clutch bag, perfect for events and weddings." },
+];
+
+let TESTIMONIALS = [
+  { name:"Ayesha Malik", location:"Lahore", text:"Maha Collection ka suit itna khoobsurat tha! Quality bohot achi thi, bilkul picture jaisi mili. WhatsApp se order karna bohot asaan tha.", avatar:"AM", rating:5 },
+  { name:"Sana Tariq", location:"Karachi", text:"Maine bridal lehenga liya tha — sab ne taarif ki! Packaging bhi bohot elegant thi. Definitely again order karungi.", avatar:"ST", rating:5 },
+  { name:"Fatima Noor", location:"Islamabad", text:"Kashmiri shawl bohot warm aur stylish hai. Ek din me delivery bhi mili. Maha Collection best hai!", avatar:"FN", rating:5 },
+  { name:"Hina Baig", location:"Peshawar", text:"Earrings bilkul original picture jaisi hain. Customer service bhi kamaal ki thi. Highly recommended!", avatar:"HB", rating:5 },
+];
+
+const CATEGORIES = ["All","Suits","Dupattas","Bridal","Shawls","Formals","Jewellery","Bags"];
+
+let adminAuthed = false;
+let editingId = null;
+let editForm = {};
+let currentTab = 'dashboard';
+
+function saveToLocalStorage() {
+  localStorage.setItem('maha_products', JSON.stringify(PRODUCTS));
+  localStorage.setItem('maha_testimonials', JSON.stringify(TESTIMONIALS));
+  localStorage.setItem('maha_config', JSON.stringify(CONFIG));
+}
+
+function loadFromLocalStorage() {
+  try {
+    const p = localStorage.getItem('maha_products');
+    if(p) PRODUCTS = JSON.parse(p);
+    const t = localStorage.getItem('maha_testimonials');
+    if(t) TESTIMONIALS = JSON.parse(t);
+    const c = localStorage.getItem('maha_config');
+    if(c) Object.assign(CONFIG, JSON.parse(c));
+  } catch(e){}
+}
+
+loadFromLocalStorage();
+
+function render() {
+  const app = document.getElementById('app');
+  if(!adminAuthed) {
+    app.innerHTML = `
+      <div class="admin-login">
+        <div class="admin-login-logo">🌸 Maha Admin</div>
+        <div class="admin-login-sub">Secure Dashboard</div>
+        <div class="a-field">
+          <label class="a-label">Password</label>
+          <input type="password" id="adminPassword" class="a-input" placeholder="••••••••" autofocus onkeypress="if(event.key==='Enter') login()"/>
+        </div>
+        <div id="loginErr" class="err-msg">❌ Galat password hai</div>
+        <button class="a-btn a-btn-primary" onclick="login()">🔐 Login to Dashboard</button>
+      </div>
+    `;
+    return;
+  }
+  app.innerHTML = `
+    <div class="admin-panel">
+      <div class="admin-hdr">
+        <h2>🛠️ Maha Collection Admin</h2>
+        <div style="display:flex;gap:10px">
+          <button class="a-btn" style="background:rgba(255,255,255,0.2);color:#fff" onclick="logout()">🚪 Logout</button>
+          <button class="a-btn" style="background:rgba(255,255,255,0.2);color:#fff" onclick="window.close()">✕ Close</button>
+        </div>
+      </div>
+      <div class="admin-body">
+        <div class="admin-sidebar">
+          <button class="admin-nav-btn ${currentTab === 'dashboard' ? 'active' : ''}" onclick="switchTab('dashboard')">📊 Dashboard</button>
+          <button class="admin-nav-btn ${currentTab === 'products' ? 'active' : ''}" onclick="switchTab('products')">🛍️ Products</button>
+          <button class="admin-nav-btn ${currentTab === 'testimonials' ? 'active' : ''}" onclick="switchTab('testimonials')">💬 Reviews</button>
+          <button class="admin-nav-btn ${currentTab === 'website' ? 'active' : ''}" onclick="switchTab('website')">🌐 Website Info</button>
+          <button class="admin-nav-btn ${currentTab === 'social' ? 'active' : ''}" onclick="switchTab('social')">📱 Social Links</button>
+          <button class="admin-nav-btn ${currentTab === 'hero' ? 'active' : ''}" onclick="switchTab('hero')">🎥 Hero & Stats</button>
+          <button class="admin-nav-btn ${currentTab === 'security' ? 'active' : ''}" onclick="switchTab('security')">🔐 Security</button>
+        </div>
+        <div class="admin-content" id="adminContent">
+          ${renderTabContent()}
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function renderTabContent() {
+  if(currentTab === 'dashboard') return renderDashboard();
+  if(currentTab === 'products') return renderProducts();
+  if(currentTab === 'testimonials') return renderTestimonials();
+  if(currentTab === 'website') return renderWebsite();
+  if(currentTab === 'social') return renderSocial();
+  if(currentTab === 'hero') return renderHero();
+  if(currentTab === 'security') return renderSecurity();
+  return '';
+}
+
+function renderDashboard() {
+  const totalProducts = PRODUCTS.length;
+  const totalRevenue = PRODUCTS.reduce((s,p)=>s+Number(p.price),0);
+  const avgPrice = totalProducts ? Math.round(totalRevenue/totalProducts) : 0;
+  return `
+    <div class="admin-stats-row">
+      <div class="admin-stat-box"><div class="asn">${totalProducts}</div><div class="asl">Total Products</div></div>
+      <div class="admin-stat-box"><div class="asn">${[...new Set(PRODUCTS.map(p=>p.category))].length}</div><div class="asl">Categories</div></div>
+      <div class="admin-stat-box"><div class="asn">${TESTIMONIALS.length}</div><div class="asl">Reviews</div></div>
+      <div class="admin-stat-box"><div class="asn">Rs.${avgPrice.toLocaleString('en-PK')}</div><div class="asl">Avg Price</div></div>
+    </div>
+    <div class="a-section">
+      <div class="a-section-title"><span>📦 Recent Products</span><button class="a-btn a-btn-primary a-btn-sm" onclick="switchTab('products')">Manage All</button></div>
+      <table class="a-table">
+        <thead><tr><th>Image</th><th>Name</th><th>Category</th><th>Price</th></tr></thead>
+        <tbody>${PRODUCTS.slice(0,5).map(p=>`<tr><td><img src="${p.image}" style="width:44px;height:38px;object-fit:cover;border-radius:6px" onerror="this.src='https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=300'"></td><td>${p.name}</td><td>${p.category}</td><td>Rs.${p.price.toLocaleString()}</td></tr>`).join('')}</tbody>
+      </table>
+    </div>
+  `;
+}
+
+function renderProducts() {
+  return `
+    <div class="a-section">
+      <div class="a-section-title"><span>🛍️ Products Management</span><button class="a-btn a-btn-primary a-btn-sm" onclick="addNewProduct()">+ Naya Product</button></div>
+      <div style="overflow-x:auto">
+        <table class="a-table">
+          <thead><tr><th>Image</th><th>Name</th><th>Category</th><th>Price</th><th>Badge</th><th>Rating</th><th>Actions</th></tr></thead>
+          <tbody id="productsTbody">${renderProductRows()}</tbody>
+        </table>
+      </div>
+    </div>
+  `;
+}
+
+function renderProductRows() {
+  return PRODUCTS.map(p => {
+    if(editingId === p.id) {
+      return `<tr style="background:#fef4f0">
+        <td><div class="img-upload-row"><input class="a-input sm" id="edit_img" value="${(editForm.image||'').replace(/"/g,'&quot;')}" oninput="editForm.image=this.value" style="min-width:120px"/><button class="img-upload-btn" onclick="uploadProductImage()">📷</button><input type="file" id="prodImgFile" accept="image/*" style="display:none" onchange="handleProdImage(this)"/></div>${editForm.image ? `<img src="${editForm.image}" class="img-preview" style="margin-top:4px">` : ''}</td>
+        <td><input class="a-input sm" value="${(editForm.name||'').replace(/"/g,'&quot;')}" oninput="editForm.name=this.value" style="min-width:130px"/></td>
+        <td><select class="a-input sm a-select" onchange="editForm.category=this.value">${CATEGORIES.filter(c=>c!=='All').map(c=>`<option${c===editForm.category?' selected':''}>${c}</option>`).join('')}</select></td>
+        <td><input class="a-input sm" type="number" value="${editForm.price||0}" oninput="editForm.price=this.value" style="width:90px"/></td>
+        <td><input class="a-input sm" value="${(editForm.badge||'').replace(/"/g,'&quot;')}" oninput="editForm.badge=this.value" style="width:90px"/></td>
+        <td><input class="a-input sm" type="number" step="0.1" value="${editForm.rating||4.5}" oninput="editForm.rating=this.value" style="width:70px"/></td>
+        <td><button class="a-btn a-btn-primary a-btn-sm" onclick="saveEdit()">✔ Save</button> <button class="a-btn a-btn-secondary a-btn-sm" onclick="cancelEdit()">Cancel</button></td>
+      </tr>
+      <tr><td colspan="7"><div class="a-grid-2"><div><label class="a-label">Description</label><textarea class="a-input sm" oninput="editForm.description=this.value">${editForm.description||''}</textarea></div><div><label class="a-label">Reviews Count</label><input class="a-input sm" type="number" value="${editForm.reviews||0}" oninput="editForm.reviews=this.value"/></div></div></td></tr>`;
+    }
+    return `<tr><td><img src="${p.image}" style="width:44px;height:38px;object-fit:cover;border-radius:6px" onerror="this.src='https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=300'"></td><td>${p.name}</td><td>${p.category}</td><td>Rs.${p.price.toLocaleString()}</td><td>${p.badge||'—'}</td><td>${p.rating}⭐</td><td><button class="a-btn a-btn-secondary a-btn-sm" onclick="startEdit('${p.id}')">✏️ Edit</button> <button class="a-btn a-btn-danger a-btn-sm" onclick="deleteProduct('${p.id}')">🗑️</button></td></tr>`;
+  }).join('');
+}
+
+function refreshProductTable() { const tbody = document.getElementById('productsTbody'); if(tbody) tbody.innerHTML = renderProductRows(); }
+function startEdit(id) { const p = PRODUCTS.find(x=>x.id===id); editingId=id; editForm={...p}; refreshProductTable(); }
+function cancelEdit() { editingId=null; editForm={}; refreshProductTable(); }
+function saveEdit() { PRODUCTS = PRODUCTS.map(p=>p.id===editingId?{...editForm,price:Number(editForm.price),rating:Number(editForm.rating),reviews:Number(editForm.reviews)}:p); cancelEdit(); saveToLocalStorage(); }
+function deleteProduct(id) { if(confirm('Delete this product?')) { PRODUCTS = PRODUCTS.filter(p=>p.id!==id); refreshProductTable(); saveToLocalStorage(); } }
+function addNewProduct() { const newId = Date.now().toString(); PRODUCTS.push({id:newId,name:"Naya Product",price:999,category:"Suits",image:"",badge:"New",rating:4.5,reviews:0,description:""}); startEdit(newId); }
+function uploadProductImage() { document.getElementById('prodImgFile').click(); }
+function handleProdImage(input) { const file = input.files[0]; if(!file) return; const reader = new FileReader(); reader.onload = ev => { editForm.image = ev.target.result; const inp = document.getElementById('edit_img'); if(inp) inp.value = ev.target.result; refreshProductTable(); }; reader.readAsDataURL(file); }
+
+function renderTestimonials() {
+  return `
+    <div class="a-section">
+      <div class="a-section-title"><span>💬 Customer Reviews</span><button class="a-btn a-btn-primary a-btn-sm" onclick="addTestimonial()">+ Naya Review</button></div>
+      <div id="testiList">${TESTIMONIALS.map((t,i)=>`<div class="testi-item"><div class="a-grid-3"><div><label class="a-label">Naam</label><input class="a-input sm" id="tname_${i}" value="${t.name.replace(/"/g,'&quot;')}"></div><div><label class="a-label">City</label><input class="a-input sm" id="tloc_${i}" value="${t.location.replace(/"/g,'&quot;')}"></div><div><label class="a-label">Rating</label><input class="a-input sm" type="number" id="trating_${i}" value="${t.rating}"></div></div><div><label class="a-label">Review Text</label><textarea class="a-input sm" id="ttext_${i}">${t.text.replace(/"/g,'&quot;')}</textarea></div><div style="margin-top:12px"><button class="a-btn a-btn-danger a-btn-sm" onclick="deleteTestimonial(${i})">🗑️ Hatao</button></div></div>`).join('')}</div>
+      <div class="a-save-bar"><button class="a-btn a-btn-primary" onclick="saveTestimonials()">✅ Reviews Save Karo</button><span id="testiMsg" class="a-success-msg">Saved!</span></div>
+    </div>`;
+}
+function addTestimonial() { TESTIMONIALS.push({name:"",location:"",text:"",avatar:"",rating:5}); render(); }
+function deleteTestimonial(i) { if(confirm('Delete this review?')) { TESTIMONIALS.splice(i,1); render(); } }
+function saveTestimonials() { TESTIMONIALS.forEach((_,i)=>{ TESTIMONIALS[i].name = document.getElementById(`tname_${i}`).value; TESTIMONIALS[i].location = document.getElementById(`tloc_${i}`).value; TESTIMONIALS[i].rating = Number(document.getElementById(`trating_${i}`).value); TESTIMONIALS[i].text = document.getElementById(`ttext_${i}`).value; TESTIMONIALS[i].avatar = TESTIMONIALS[i].name.slice(0,2).toUpperCase(); }); saveToLocalStorage(); showMsg('testiMsg'); }
+
+function renderWebsite() {
+  return `<div class="a-section"><div class="a-section-title">🌐 Basic Info</div><div class="a-grid-2"><div><label class="a-label">Brand Name</label><input class="a-input" id="cfg_brandName" value="${CONFIG.brandName}"></div><div><label class="a-label">Tagline</label><input class="a-input" id="cfg_tagline" value="${CONFIG.tagline}"></div><div><label class="a-label">WhatsApp Number</label><input class="a-input" id="cfg_wa" value="${CONFIG.whatsappNumber}"></div></div><div class="a-save-bar"><button class="a-btn a-btn-primary" onclick="saveWebsiteBasic()">Save</button><span id="webMsg" class="a-success-msg">Saved!</span></div></div>
+  <div class="a-section"><div class="a-section-title">🏷️ Trust Pills</div><div id="pillsContainer">${(CONFIG.trustPills || []).map((p,i)=>`<div style="display:flex;gap:8px;margin-bottom:8px"><input class="a-input" id="pill_${i}" value="${p.replace(/"/g,'&quot;')}" style="flex:1"><button class="a-btn a-btn-danger a-btn-sm" onclick="removeTrustPill(${i})">🗑️</button></div>`).join('')}</div><button class="a-btn a-btn-secondary a-btn-sm" onclick="addTrustPill()">+ Add Pill</button><div class="a-save-bar"><button class="a-btn a-btn-primary" onclick="saveTrustPills()">Save Pills</button><span id="pillMsg" class="a-success-msg">Saved!</span></div></div>`;
+}
+function saveWebsiteBasic() { CONFIG.brandName = document.getElementById('cfg_brandName').value; CONFIG.tagline = document.getElementById('cfg_tagline').value; CONFIG.whatsappNumber = document.getElementById('cfg_wa').value; saveToLocalStorage(); showMsg('webMsg'); }
+function addTrustPill() { if(!CONFIG.trustPills) CONFIG.trustPills = []; CONFIG.trustPills.push("New Pill"); render(); }
+function removeTrustPill(i) { CONFIG.trustPills.splice(i,1); render(); }
+function saveTrustPills() { CONFIG.trustPills = []; document.querySelectorAll('[id^="pill_"]').forEach(inp=>{ CONFIG.trustPills.push(inp.value); }); saveToLocalStorage(); showMsg('pillMsg'); }
+
+function renderSocial() {
+  return `<div class="a-section"><div class="a-section-title">📱 Social Links</div><div class="a-grid-2"><div><label class="a-label">Instagram URL</label><input class="a-input" id="cfg_ig" value="${CONFIG.instagram}"></div><div><label class="a-label">Facebook URL</label><input class="a-input" id="cfg_fb" value="${CONFIG.facebook}"></div><div><label class="a-label">TikTok URL</label><input class="a-input" id="cfg_tt" value="${CONFIG.tiktok}"></div></div><div class="a-save-bar"><button class="a-btn a-btn-primary" onclick="saveSocial()">Save Social Links</button><span id="socialMsg" class="a-success-msg">Saved!</span></div></div>`;
+}
+function saveSocial() { CONFIG.instagram = document.getElementById('cfg_ig').value; CONFIG.facebook = document.getElementById('cfg_fb').value; CONFIG.tiktok = document.getElementById('cfg_tt').value; saveToLocalStorage(); showMsg('socialMsg'); }
+
+function renderHero() {
+  return `<div class="a-section"><div class="a-section-title">🎥 Hero Text & Banner</div><div class="a-grid-2"><div><label class="a-label">Hero Title Line 1</label><input class="a-input" id="hero1" value="${CONFIG.heroTitle1||'Maha'}"></div><div><label class="a-label">Hero Title Line 2</label><input class="a-input" id="hero2" value="${CONFIG.heroTitle2||'Collection'}"></div><div><label class="a-label">Sub Text</label><textarea class="a-input" id="heroSub">${CONFIG.heroSub||''}</textarea></div><div><label class="a-label">Banner Image URL / Upload</label><div class="img-upload-row"><input class="a-input" id="heroBanner" value="${CONFIG.heroBanner||''}"><button class="img-upload-btn" onclick="document.getElementById('bannerFile').click()">📷 Gallery</button><input type="file" id="bannerFile" accept="image/*" style="display:none" onchange="handleBannerFile(this)"/></div></div></div><div class="a-save-bar"><button class="a-btn a-btn-primary" onclick="saveHeroText()">Save Hero</button><span id="heroMsg" class="a-success-msg">Saved!</span></div></div>
+  <div class="a-section"><div class="a-section-title">📊 Stats Numbers</div><div class="a-grid-2">${[['stat1n','stat1l'],['stat2n','stat2l'],['stat3n','stat3l'],['stat4n','stat4l']].map(([nk,nl])=>`<div><label class="a-label">${nk}</label><input class="a-input" id="${nk}" value="${CONFIG[nk]||''}"><label class="a-label">${nl}</label><input class="a-input" id="${nl}" value="${CONFIG[nl]||''}"></div>`).join('')}</div><div class="a-save-bar"><button class="a-btn a-btn-primary" onclick="saveStats()">Save Stats</button><span id="statsMsg" class="a-success-msg">Saved!</span></div></div>`;
+}
+function handleBannerFile(input) { const file = input.files[0]; if(!file) return; const reader = new FileReader(); reader.onload = ev => { CONFIG.heroBanner = ev.target.result; const inp = document.getElementById('heroBanner'); if(inp) inp.value = ev.target.result; }; reader.readAsDataURL(file); }
+function saveHeroText() { CONFIG.heroTitle1 = document.getElementById('hero1').value; CONFIG.heroTitle2 = document.getElementById('hero2').value; CONFIG.heroSub = document.getElementById('heroSub').value; CONFIG.heroBanner = document.getElementById('heroBanner').value; saveToLocalStorage(); showMsg('heroMsg'); }
+function saveStats() { const stats = ['stat1n','stat1l','stat2n','stat2l','stat3n','stat3l','stat4n','stat4l']; stats.forEach(s=>{ CONFIG[s] = document.getElementById(s).value; }); saveToLocalStorage(); showMsg('statsMsg'); }
+
+function renderSecurity() {
+  return `<div class="a-section"><div class="a-section-title">🔐 Change Password</div><div><div class="a-field"><label class="a-label">Naya Password</label><input type="password" id="newPw1" class="a-input"></div><div class="a-field"><label class="a-label">Confirm Password</label><input type="password" id="newPw2" class="a-input"></div><div id="pwErr" style="color:#e53e3e;font-size:12px;display:none"></div><button class="a-btn a-btn-primary" onclick="changePassword()">Update Password</button><span id="pwMsg" class="a-success-msg" style="margin-left:12px">Changed!</span></div></div>`;
+}
+function changePassword() { const p1 = document.getElementById('newPw1').value; const p2 = document.getElementById('newPw2').value; if(!p1) { showErr('Password empty'); return; } if(p1!==p2) { showErr('Passwords do not match'); return; } CONFIG.adminPassword = p1; saveToLocalStorage(); showMsg('pwMsg'); }
+function showErr(msg) { const e = document.getElementById('pwErr'); if(e){ e.textContent=msg; e.style.display='block'; setTimeout(()=>e.style.display='none',2500); } }
+function showMsg(id) { const el = document.getElementById(id); if(el){ el.classList.add('show'); setTimeout(()=>el.classList.remove('show'),2000); } }
+
+function switchTab(tab) { currentTab = tab; editingId = null; render(); }
+function login() { const pw = document.getElementById('adminPassword').value; if(pw === CONFIG.adminPassword) { adminAuthed = true; render(); } else { document.getElementById('loginErr').style.display = 'block'; } }
+function logout() { adminAuthed = false; render(); }
+window.login = login; window.logout = logout; window.switchTab = switchTab; window.addNewProduct = addNewProduct; window.startEdit = startEdit; window.cancelEdit = cancelEdit; window.saveEdit = saveEdit; window.deleteProduct = deleteProduct; window.uploadProductImage = uploadProductImage; window.handleProdImage = handleProdImage; window.addTestimonial = addTestimonial; window.deleteTestimonial = deleteTestimonial; window.saveTestimonials = saveTestimonials; window.saveWebsiteBasic = saveWebsiteBasic; window.saveTrustPills = saveTrustPills; window.addTrustPill = addTrustPill; window.removeTrustPill = removeTrustPill; window.saveSocial = saveSocial; window.saveHeroText = saveHeroText; window.saveStats = saveStats; window.changePassword = changePassword; window.handleBannerFile = handleBannerFile;
+
+render();
+</script>
+</body>
+</html>
