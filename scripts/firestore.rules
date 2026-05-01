@@ -1,0 +1,109 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function adminDocPath() {
+      return /databases/$(database)/documents/admins/$(request.auth.uid);
+    }
+
+    function isAdmin() {
+      return signedIn() && exists(adminDocPath()) && get(adminDocPath()).data.isActive == true;
+    }
+
+    function hasAdminClaim() {
+      return signedIn() && request.auth.token.admin == true;
+    }
+
+    function allowedCustomerFields() {
+      return ['fullName', 'email', 'role', 'phone', 'address', 'isActive', 'lastLoginAt', 'createdAt', 'updatedAt'];
+    }
+
+    function validCustomerProfile(userId) {
+      return userId.matches('customer-.*')
+        && request.resource.data.keys().hasOnly(allowedCustomerFields())
+        && request.resource.data.role == 'customer'
+        && request.resource.data.isActive == true
+        && request.resource.data.fullName is string
+        && request.resource.data.phone is string
+        && request.resource.data.email is string;
+    }
+
+    function validPublicCustomerCreate(userId) {
+      return !signedIn()
+        && validCustomerProfile(userId);
+    }
+
+    function validPublicCustomerUpdate(userId) {
+      return !signedIn()
+        && resource.data.role == 'customer'
+        && resource.data.isActive == true
+        && validCustomerProfile(userId);
+    }
+
+    function allowedReviewFields() {
+      return ['productId', 'userId', 'rating', 'title', 'comment', 'type', 'customerName', 'location', 'avatar', 'isApproved', 'createdAt'];
+    }
+
+    function validPublicReviewCreate() {
+      return request.resource.data.keys().hasOnly(allowedReviewFields())
+        && request.resource.data.type in ['product', 'testimonial']
+        && request.resource.data.rating is number
+        && request.resource.data.rating >= 1
+        && request.resource.data.rating <= 5
+        && request.resource.data.comment is string
+        && request.resource.data.customerName is string
+        && request.resource.data.isApproved == true;
+    }
+
+    match /admins/{adminId} {
+      allow read: if signedIn() && (request.auth.uid == adminId || isAdmin());
+      allow create: if isAdmin() || (hasAdminClaim() && request.auth.uid == adminId);
+      allow update: if isAdmin() || (hasAdminClaim() && request.auth.uid == adminId);
+      allow delete: if isAdmin();
+    }
+
+    match /settings/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /categories/{categoryId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /products/{productId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /reviews/{reviewId} {
+      allow read: if true;
+      allow create: if validPublicReviewCreate();
+      allow update, delete: if isAdmin();
+    }
+
+    match /users/{userId} {
+      allow read: if signedIn() && (request.auth.uid == userId || isAdmin());
+      allow create: if isAdmin()
+        || (signedIn() && request.auth.uid == userId && validCustomerProfile(userId))
+        || validPublicCustomerCreate(userId);
+      allow update: if isAdmin()
+        || (signedIn() && request.auth.uid == userId && validCustomerProfile(userId))
+        || validPublicCustomerUpdate(userId);
+      allow delete: if isAdmin();
+    }
+
+    match /inventory/{movementId} {
+      allow read, write: if isAdmin();
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ur">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Maha Collection – Where Every Piece Tells a Story</title>
+  <meta name="description"
+    content="Premium Pakistani fashion — lawn suits, bridal wear, jewellery & more. Order instantly on WhatsApp." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Nunito:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="../style/home.css" />
+</head>
+
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar" id="navbar">
+    <a class="nav-logo" href="#">Maha <span>Collection</span></a>
+    <div class="nav-links">
+      <a href="#products">Collection</a>
+      <a href="#brand">About</a>
+      <a href="#testi">Reviews</a>
+    </div>
+    <a href="https://wa.me/923700429801" target="_blank" rel="noopener noreferrer" class="nav-wa">
+      <svg viewBox="0 0 24 24" fill="currentColor" width="15" height="15">
+        <path
+          d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+      </svg>
+      WhatsApp Order
+    </a>
+    <button class="nav-menu-btn" id="menuBtn" aria-label="Menu">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8B1A4A" stroke-width="2.5">
+        <path d="M3 12h18M3 6h18M3 18h18" />
+      </svg>
+    </button>
+  </nav>
+  <div class="nav-mobile" id="mobileNav">
+    <a href="#products" onclick="closeMobileNav()">Collection</a>
+    <a href="#brand" onclick="closeMobileNav()">About</a>
+    <a href="#testi" onclick="closeMobileNav()">Reviews</a>
+    <a href="https://wa.me/923700429801" target="_blank">📱 WhatsApp Order</a>
+  </div>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <div class="hero-video-wrap">
+      <video id="heroVideo" class="hero-video" autoplay muted playsinline>
+        <source src="https://videos.pexels.com/video-files/3195394/3195394-uhd_2560_1440_25fps.mp4" type="video/mp4" />
+      </video>
+      <div class="hero-overlay"></div>
+    </div>
+    <div class="particles" id="particles"></div>
+    <div class="hero-content">
+      <div class="hero-badge"><span class="badge-dot"></span>✦ New Collection 2026 ✦</div>
+      <h1 class="hero-title">
+        <span class="ht-1">Maha</span>
+        <span class="ht-2">Collection</span>
+      </h1>
+      <p class="hero-tagline">Where Every Piece Tells a Story</p>
+      <p class="hero-sub">Premium Pakistani fashion — lawn suits, bridal wear, jewellery &amp; more.<br />Order
+        instantly on WhatsApp 🇵🇰</p>
+      <div class="hero-btns">
+        <a href="#products" class="hbtn hbtn-primary">
+          <span>Explore Collection</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </a>
+        <a href="https://wa.me/923700429801" target="_blank" rel="noopener noreferrer" class="hbtn hbtn-wa">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="17" height="17">
+            <path
+              d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+          </svg>
+          Order on WhatsApp
+        </a>
+      </div>
+      <div class="hero-trust">
+        <span class="trust-pill">🚚 Fast Delivery</span>
+        <span class="trust-pill">✅ 100% Authentic</span>
+        <span class="trust-pill">💬 24/7 Support</span>
+        <span class="trust-pill">🔄 Easy Returns</span>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <div class="scroll-mouse">
+        <div class="scroll-wheel"></div>
+      </div>
+      <span>Scroll</span>
+    </div>
+    <div class="video-dots" id="videoDots"></div>
+  </section>
+
+  <!-- ===== STATS ===== -->
+  <div class="stats-banner">
+    <div class="stats-inner">
+      <div class="stat-item"><span class="stat-n">10,000+</span><span class="stat-l">Happy Customers</span></div>
+      <div class="stat-item"><span class="stat-n">500+</span><span class="stat-l">Products</span></div>
+      <div class="stat-item"><span class="stat-n">4.9★</span><span class="stat-l">Average Rating</span></div>
+      <div class="stat-item"><span class="stat-n">Same Day</span><span class="stat-l">WhatsApp Reply</span></div>
+    </div>
+  </div>
+
+  <!-- ===== PRODUCTS ===== -->
+  <section class="section" id="products">
+    <div class="sec-eyebrow">✦ Our Collection</div>
+    <h2 class="sec-title">Hamare Khoobsurat Products</h2>
+    <div class="search-wrap">
+      <input class="search-inp" id="searchInp" type="text" placeholder="Search products..." />
+      <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+        stroke-width="2">
+        <circle cx="11" cy="11" r="8" />
+        <path d="m21 21-4.35-4.35" />
+      </svg>
+    </div>
+    <div class="filter-wrap" id="filterWrap"></div>
+    <div class="pgrid" id="productGrid"></div>
+  </section>
+
+  <!-- ===== TESTIMONIALS ===== -->
+  <section class="section testi-section" id="testi">
+    <div class="sec-eyebrow">💬 Customer Love</div>
+    <h2 class="sec-title">Hamare Khush Customers</h2>
+    <div class="testi-grid" id="testiGrid"></div>
+  </section>
+
+  <!-- ===== BRAND STORY ===== -->
+  <section class="brand-wrap" id="brand">
+    <div class="brand-inner">
+      <div class="brand-img-col">
+        <img src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=600&q=85" alt="Maha Collection"
+          class="brand-img" />
+        <img src="https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=400&q=85" alt="Fabric"
+          class="brand-img2" />
+        <div class="brand-badge">
+          <span style="font-size:28px">🌸</span>
+          <div>
+            <div style="font-weight:600;font-size:14px;color:var(--wine)">Premium Quality</div>
+            <div style="font-size:11px;color:#888">Har piece inspected</div>
+          </div>
+        </div>
+      </div>
+      <div class="brand-text-col">
+        <div class="sec-eyebrow" style="text-align:left">✦ Hamari Kahani</div>
+        <h2 class="sec-title" style="text-align:left;font-size:clamp(28px,4vw,44px);color:#fff;margin-bottom:20px">
+          Har Kapray Mein<br /><span style="color:var(--gold)">Mohabbat</span> Buni Hai
+        </h2>
+        <p class="brand-p">Maha Collection ki bunyad ek khwab pe rakhi gayi — ke har Pakistani khatoon ko best quality
+          fashion asaani se milni chahiye. Hum directly best artisans se kaam karte hain taake aapko genuine, khoobsurat
+          pieces milein.</p>
+        <p class="brand-p">Lawn suits se lekar bridal lehngon tak, har cheez painstaking care ke saath choose ki jati
+          hai. Aur ordering? Bilkul asaan — bas WhatsApp pe message karein.</p>
+        <div class="brand-stats">
+          <div class="bstat"><span class="bstat-n">10K+</span><span class="bstat-l">Khush Customers</span></div>
+          <div class="bstat"><span class="bstat-n">500+</span><span class="bstat-l">Products</span></div>
+          <div class="bstat"><span class="bstat-n">4.9★</span><span class="bstat-l">Avg Rating</span></div>
+          <div class="bstat"><span class="bstat-n">🇵🇰</span><span class="bstat-l">Nationwide Delivery</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <h3>Maha Collection</h3>
+          <p>Where Every Piece Tells a Story. Premium Pakistani fashion delivered to your doorstep.</p>
+          <div class="social-links">
+            <a href="https://www.instagram.com/mahacollection" target="_blank" class="slink" title="Instagram">📷</a>
+            <a href="https://www.facebook.com/mahacollection" target="_blank" class="slink" title="Facebook">📘</a>
+            <a href="https://www.tiktok.com/@mahacollection" target="_blank" class="slink" title="TikTok">🎵</a>
+            <a href="https://wa.me/923700429801" target="_blank" class="slink" title="WhatsApp">💬</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Collection</h4>
+          <a href="#products">Lawn Suits</a>
+          <a href="#products">Bridal Wear</a>
+          <a href="#products">Jewellery</a>
+          <a href="#products">Shawls</a>
+          <a href="#products">Bags</a>
+        </div>
+        <div class="footer-col">
+          <h4>Help</h4>
+          <a href="https://wa.me/923700429801" target="_blank">How to Order</a>
+          <a href="https://wa.me/923700429801" target="_blank">Delivery Info</a>
+          <a href="https://wa.me/923700429801" target="_blank">Returns Policy</a>
+          <a href="https://wa.me/923700429801" target="_blank">Contact Us</a>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <a href="https://wa.me/923700429801" target="_blank">📱 +92 370 0429801</a>
+          <a href="https://www.instagram.com/mahacollection" target="_blank">📷 @mahacollection</a>
+          <a href="https://www.facebook.com/mahacollection" target="_blank">📘 Maha Collection</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Maha Collection. All rights reserved.</p>
+        <p>Made with ❤️ in Pakistan 🇵🇰</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== FLOATING WA ===== -->
+  <a href="https://wa.me/923700429801" target="_blank" rel="noopener noreferrer" class="float-wa">
+    <svg viewBox="0 0 24 24" fill="currentColor" width="26" height="26">
+      <path
+        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+    </svg>
+    <span class="float-wa-tooltip">Order on WhatsApp</span>
+  </a>
+
+  <!-- ===== MODALS (rendered by JS) ===== -->
+  <div id="modalRoot"></div>
+
+  <script type="module" src="../scripts/firebase-setup.js"></script>
+  <script type="module" src="../scripts/database-functions.js"></script>
+  <script type="module" src="../scripts/home/index.js"></script>
+</body>
+</html>
