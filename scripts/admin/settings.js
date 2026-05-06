@@ -107,6 +107,8 @@ export async function saveStats() {
 
 export function renderSecurity() {
     const currentUsername = auth.currentUser?.displayName || state.pendingUsername || "admin";
-    const currentEmail = auth.currentUser?.email || `${currentUsername}@maha-admin.local`;
+    const currentEmail = auth.currentUser?.email ;
     return `<div class="a-section"><div class="a-section-title">🔐 Admin Account</div><div class="a-grid-2"><div><label class="a-label">Signed In As</label><input class="a-input" value="${escapeHtml(currentUsername)}" disabled></div><div><label class="a-label">Email</label><input class="a-input" value="${escapeHtml(currentEmail)}" disabled></div></div><div class="a-save-bar"><button class="a-btn a-btn-secondary" onclick="logout()">Sign Out</button><span id="pwMsg" class="a-success-msg" style="margin-left:12px">Ready</span></div></div>`;
 }
+
+// || `${currentUsername}@maha-admin.local`

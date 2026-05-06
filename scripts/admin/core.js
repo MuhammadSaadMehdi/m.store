@@ -80,15 +80,8 @@ export function escapeHtml(value) {
     .replace(/'/g, "&#39;");
 }
 
-export function normalizeUsername(value) {
-  return String(value || "")
-    .trim()
-    .toLowerCase()
-    .replace(/[^a-z0-9._-]/g, "");
-}
-
 export function usernameToEmail(username) {
-  return `${normalizeUsername(username)}@maha-admin.local`;
+  return username;
 }
 
 export function readAuthForm() {

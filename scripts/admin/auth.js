@@ -7,7 +7,6 @@ import {
   auth,
   dbApi,
   escapeHtml,
-  normalizeUsername,
   usernameToEmail,
   readAuthForm,
   setAuthMessage,
@@ -52,9 +51,7 @@ export function renderAuthScreen() {
 export async function ensureAdminRecord(user, usernameHint = "") {
   if (!user) return null;
   const existing = await dbApi.admins.getById(user.uid).catch(() => null);
-  const username = normalizeUsername(
-    usernameHint || user.displayName || user.email || user.uid,
-  );
+  const username = usernameHint || user.displayName || user.email || user.uid;
   const payload = {
     username,
     displayName: user.displayName || username,
