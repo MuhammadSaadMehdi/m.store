@@ -19,7 +19,7 @@ export function renderAuthScreen() {
   const isRegister = state.authMode === "register";
   app.innerHTML = `
       <div class="admin-login">
-        <div class="admin-login-logo">🌸 Maha Admin</div>
+        <div class="admin-login-logo">🌸 Maqbool Admin</div>
         <div class="admin-login-sub">${isRegister ? "Create your admin account" : "Sign in to the dashboard"}</div>
         ${state.authStatus ? `<div class="a-success-msg show" style="display:block;margin-bottom:12px">${escapeHtml(state.authStatus)}</div>` : ""}
         ${state.authError ? `<div id="loginErr" class="err-msg" style="display:block">❌ ${escapeHtml(state.authError)}</div>` : `<div id="loginErr" class="err-msg" style="display:none">❌ Authentication error</div>`}

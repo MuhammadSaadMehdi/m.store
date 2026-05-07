@@ -22,7 +22,7 @@ export function render() {
   app.innerHTML = `
     <div class="admin-panel">
       <div class="admin-hdr">
-        <h2>🛠️ Maha Collection Admin</h2>
+        <h2>🛠️ Maqbool Collection Admin</h2>
         <div style="display:flex;gap:10px">
           <button class="a-btn" style="background:rgba(255,255,255,0.2);color:#fff" onclick="logout()">🚪 Logout</button>
           <button class="a-btn" style="background:rgba(255,255,255,0.2);color:#fff" onclick="window.close()">✕ Close</button>

@@ -45,7 +45,7 @@ export function showCustomerAccountForm(prefill = {}) {
       <div class="modal-box auth-modal-box" onclick="event.stopPropagation()">
         <button class="modal-x" onclick="cancelCustomerAccountForm()">✕</button>
         <div class="auth-sheet">
-          <div class="auth-logo">Maha <span>Collection</span></div>
+          <div class="auth-logo">Maqbool <span>Collection</span></div>
           <p class="auth-sub">CUSTOMER ACCOUNT</p>
           <h3 class="auth-title">Login / Register</h3>
           <p class="auth-copy">Buy Now se pehle details save kar lein. Next time direct order hoga.</p>

@@ -6,13 +6,13 @@ export { auth, dbApi };
 export const state = {
   CONFIG: {
     whatsappNumber: "923700429801",
-    brandName: "Maha Collection",
+    brandName: "Maqbool Collection",
     tagline: "Where Every Piece Tells a Story",
-    instagram: "https://www.instagram.com/mahacollection",
-    facebook: "https://www.facebook.com/mahacollection",
-    tiktok: "https://www.tiktok.com/@mahacollection",
+    instagram: "https://www.instagram.com/maqboolcollection",
+    facebook: "https://www.facebook.com/maqboolcollection",
+    tiktok: "https://www.tiktok.com/@maqboolcollection",
     heroBanner: "",
-    heroTitle1: "Maha",
+    heroTitle1: "Maqbool",
     heroTitle2: "Collection",
     heroSub:
       "Premium Pakistani fashion - lawn suits, bridal wear, jewellery & more.\nOrder instantly on WhatsApp",
@@ -133,18 +133,18 @@ export function showMsg(id) {
 }
 
 export function saveToLocalStorage() {
-  localStorage.setItem("maha_products", JSON.stringify(state.PRODUCTS));
-  localStorage.setItem("maha_testimonials", JSON.stringify(state.TESTIMONIALS));
-  localStorage.setItem("maha_config", JSON.stringify(state.CONFIG));
+  localStorage.setItem("maqbool_products", JSON.stringify(state.PRODUCTS));
+  localStorage.setItem("maqbool_testimonials", JSON.stringify(state.TESTIMONIALS));
+  localStorage.setItem("maqbool_config", JSON.stringify(state.CONFIG));
 }
 
 export function loadFromLocalStorage() {
   try {
-    const p = localStorage.getItem("maha_products");
+    const p = localStorage.getItem("maqbool_products");
     if (p) state.PRODUCTS = JSON.parse(p);
-    const t = localStorage.getItem("maha_testimonials");
+    const t = localStorage.getItem("maqbool_testimonials");
     if (t) state.TESTIMONIALS = JSON.parse(t);
-    const c = localStorage.getItem("maha_config");
+    const c = localStorage.getItem("maqbool_config");
     if (c) Object.assign(state.CONFIG, JSON.parse(c));
   } catch {
     // ignore local fallback parse errors

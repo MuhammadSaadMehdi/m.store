@@ -1,11 +1,11 @@
 export const state = {
   CONFIG: {
     whatsappNumber: "923700429801",
-    brandName: "Maha Collection",
+    brandName: "Maqbool Collection",
     tagline: "Where Every Piece Tells a Story",
-    instagram: "https://www.instagram.com/mahacollection",
-    facebook: "https://www.facebook.com/mahacollection",
-    tiktok: "https://www.tiktok.com/@mahacollection",
+    instagram: "https://www.instagram.com/maqboolcollection",
+    facebook: "https://www.facebook.com/maqboolcollection",
+    tiktok: "https://www.tiktok.com/@maqboolcollection",
     adminPassword: "admin1234",
   },
   HERO_VIDEOS: [
@@ -14,7 +14,7 @@ export const state = {
     "https://videos.pexels.com/video-files/4763824/4763824-uhd_2560_1440_25fps.mp4",
   ],
   CATEGORY_MAP: {},
-  CUSTOMER_ORDER_CACHE_KEY: "maha_customer_profile",
+  CUSTOMER_ORDER_CACHE_KEY: "maqbool_customer_profile",
   pendingReviewProduct: null,
   pendingAccountResolver: null,
   activeCategory: "All",
@@ -88,7 +88,7 @@ export async function loadStoreFromFirestore() {
 
   const navLogo = document.querySelector(".nav-logo");
   if (navLogo) {
-    const [first = "Maha", second = "Collection"] = state.CONFIG.brandName.split(" ");
+    const [first = "Maqbool", second = "Collection"] = state.CONFIG.brandName.split(" ");
     navLogo.innerHTML = `${first} <span>${second}</span>`;
   }
 }
